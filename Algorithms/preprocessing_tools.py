@@ -87,7 +87,7 @@ def cleanAndSaveData(in_file_name, out_file_name, threshold, out_vocab_file, cle
 
 
 def preprocessDataset(in_file_name, out_file_name, options):
-	df = pd.read_csv(in_file_name, header=0, index_col=0)
+	df = pd.read_csv(in_file_name, header=None)
 
 	frames = []
 

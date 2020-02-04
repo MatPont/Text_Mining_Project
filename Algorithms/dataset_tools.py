@@ -4,8 +4,8 @@ import json
 
 def separe_text_label(file_name, out_prefix_file_name):
     df = pd.read_csv(file_name, sep="\t")
-    df.iloc[:,1].to_csv(out_prefix_file_name+"_texts.txt", index=False)
-    df.iloc[:,0].to_csv(out_prefix_file_name+"_labels.txt", index=False)
+    df.columns = ['Label', 'Text']
+    df.to_csv(out_prefix_file_name+".txt", index=False)
     
 def separe_text_label_json(file_name, out_prefix_file_name):
     df_texts = pd.DataFrame()
@@ -14,8 +14,9 @@ def separe_text_label_json(file_name, out_prefix_file_name):
         myjson = json.loads(line)
         df_texts = df_texts.append(pd.DataFrame([myjson['raw']]))
         df_labels = df_labels.append(pd.DataFrame([myjson['label']]))
-    df_texts.to_csv(out_prefix_file_name+"_texts.txt", index=False, header=False)
-    df_labels.to_csv(out_prefix_file_name+"_labels.txt", index=False, header=False)
+    df = pd.concat([df_labels, df_texts], axis=1)
+    df.columns = ['Label', 'Text']
+    df.to_csv(out_prefix_file_name+".txt", index=False)
         
 
 if __name__ == "__main__":
