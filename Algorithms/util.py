@@ -1,3 +1,5 @@
+# Author: Mathieu Pont
+
 import os
 from scipy import io, sparse
 import numpy as np

@@ -1,3 +1,5 @@
+# Author: Mathieu Pont
+
 import sys
 import scipy
 import pandas as pd

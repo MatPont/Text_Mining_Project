@@ -1,3 +1,5 @@
+# Author: Mathieu Pont
+
 import sys
 import pandas as pd
 import json
