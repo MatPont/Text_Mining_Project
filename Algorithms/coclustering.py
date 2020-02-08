@@ -10,6 +10,7 @@ from sklearn.metrics import adjusted_rand_score as ari
 from coclust.coclustering import CoclustInfo, CoclustMod
 from coclust.evaluation.external import accuracy
 from config import result_path, dataset_path
+from util import makedir
 
 
 
@@ -62,7 +63,11 @@ for dataset in datasets:
 
     for model, model_name in algo_pipeline:
         res_nmi, res_ari, res_acc = execute_algo(model, model_name, mat, y)
-        out_file = result_path+"/"+data_version+"/"+dataset+"_"+mat_version+"_"+model_name+".txt"
+        
+        # Save results
+        out_dir = result_path+"/"+data_version+"/"
+        makedir(out_dir)
+        out_file = out_dir+dataset+"_"+mat_version+"_"+model_name+".txt"
         content = str(res_nmi)+", "+str(res_ari)+", "+str(res_acc)+"\n"
         myfile = open(out_file, "a")
         myfile.write(content)

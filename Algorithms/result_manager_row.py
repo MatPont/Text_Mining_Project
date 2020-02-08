@@ -3,9 +3,8 @@
 from config import result_path, dataset_path
 import pandas as pd
 from statistics import mean, stdev
-from config import result_path
 
-data_versions = ["2000", "5000"]
+data_versions = ["2000", "5000", "5000_50", "5000_50_AllTag"]
 mat_versions = ["bow", "tf-idf-l2"]
 datasets = ["classic3", "classic4", "ng5", "ng20", "r8", "r40", "r52", "webkb"]
 algos = ["CoclustInfo", "CoclustMod"]

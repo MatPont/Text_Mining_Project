@@ -1,3 +1,4 @@
-dataset_path = "../Datasets/"
-result_path = "../Results/"
-model_path = "../Models/"
+prepath = "../"
+dataset_path = prepath+"Datasets/"
+result_path = prepath+"Results/"
+model_path = prepath+"Models/"

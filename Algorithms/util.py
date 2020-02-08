@@ -5,7 +5,7 @@ from scipy import io, sparse
 import numpy as np
 import random
 from sklearn.metrics import normalized_mutual_info_score, adjusted_rand_score
-from cluster_acc import acc
+from coclust.evaluation.external import accuracy as acc
 import pandas as pd
 
 
