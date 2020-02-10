@@ -43,13 +43,15 @@ def compute_column_metrics(column_labels, word_vectors, df_vocab, alphas=[0.9, 0
             print(sim_matrix_label)
             # Get pair words names and score
             pair_words = sim_matrix_label.where(np.triu(np.ones(sim_matrix_label.shape), 1).astype(np.bool))
-            pair_words = pair_words.stack().reset_index().sort_values(0)
+            pair_words = pair_words.stack().reset_index()
+            pair_words.columns = ['Row','Column','Value']
+            pair_words = pair_words.sort_values('Value')
 
             # Compute metrics
             tp += (np.triu(sim_matrix_label, 1) >= alpha).sum()
             fp += (np.triu(sim_matrix_label, 1) < alpha).sum()
             
-        # We filter the sim_matrix by keeping values of words being not in the same cluster
+        # Filter the sim_matrix by keeping values of words being not in the same cluster
         column_labels = np.array(column_labels)
         matrix_filter = np.matrix(list(map(lambda x: x == column_labels, column_labels)))
         sim_matrix_diff = sim_matrix.copy()
