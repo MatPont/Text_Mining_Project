@@ -4,6 +4,7 @@ from config import result_path, dataset_path
 import pandas as pd
 from statistics import mean, stdev
 import itertools
+from shutil import copyfile
 
 data_versions = ["2000", "5000", "5000_AllTag", "5000_50", "5000_50_AllTag"]
 mat_versions = ["bow", "tf-idf-l2"]
@@ -52,19 +53,54 @@ for dataset in datasets:
         all_string.append(best_string)
         all_mean.append(best_mean)
 
+
+
 print("\n\n\n")
 errors = {newlist: 0 for newlist in all_version}
+compare = []
 for i in range(len(all_string)):
+    if i % 2 == 0:
+        print("#####################")
     print(all_string[i])
     print(round(all_mean[i], 2))
-    print(round(all_version_mean[chosen][i], 2))
+    print("chosen =", round(all_version_mean[chosen][i], 2))
     for version in all_version_mean:
         errors[version] += (all_mean[i] - all_version_mean[version][i]) ** 2
+
+
 
 print("\n\n\n")
 for version in errors:
     print(version)
     print(round(errors[version], 4))
 
+
+
+print("\n\n\n")
+compare = []
+for i in range(len(all_string)):
+    # get value for this version for the other algo
+    new_ind = i + (1 if i % 2 == 0 else -1)
+    new_version = ' '.join(all_string[i].split(" ")[-2:])
+    diff = mean([all_mean[i], all_version_mean[new_version][new_ind]])
+    compare.append((new_version, diff))
+for v in compare:
+    print(v) 
+print()
+
+for i in range(0, len(compare), 2):
+    best_version = compare[i][0] if compare[i][1] > compare[i+1][1] else compare[i+1][0]
+    this_dataset = datasets[i//2]
+    print(this_dataset, best_version)
+    best_mat_version, best_data_version = best_version.split(" ")
+    path = dataset_path+"/"+best_data_version+"/"+this_dataset
+    new_path = dataset_path+"/best/"+this_dataset
+    files = ["_preprocessed.csv", "_preprocessed_"+best_mat_version+".mat", "_preprocessed_vocabulary.csv"]
+    out_files = ["_preprocessed.csv", "_preprocessed.mat", "_preprocessed_vocabulary.csv"]    
+    for i in range(len(files)):
+        file_name = files[i]
+        print(path+file_name)
+        copyfile(path+file_name, new_path+out_files[i])
     
-    
+        
+
