@@ -7,7 +7,7 @@ import numpy as np
 from scipy import io
 from sklearn.metrics import normalized_mutual_info_score as nmi
 from sklearn.metrics import adjusted_rand_score as ari
-from coclust.coclustering import CoclustInfo, CoclustMod
+from coclust.coclustering import CoclustInfo, CoclustMod, CoclustSpecMod
 from coclust.evaluation.external import accuracy
 from config import result_path, dataset_path
 from util import makedir
@@ -58,8 +58,9 @@ for dataset in datasets:
     print(no_cluster)
 
     algo_pipeline = []
-    algo_pipeline.append((CoclustInfo(n_row_clusters=no_cluster, n_col_clusters=no_cluster, n_init=10, max_iter=200), "CoclustInfo"))
-    algo_pipeline.append((CoclustMod(n_clusters=no_cluster, n_init=10, max_iter=200), "CoclustMod"))
+    """algo_pipeline.append((CoclustInfo(n_row_clusters=no_cluster, n_col_clusters=no_cluster, n_init=10, max_iter=200), "CoclustInfo"))
+    algo_pipeline.append((CoclustMod(n_clusters=no_cluster, n_init=10, max_iter=200), "CoclustMod"))"""
+    algo_pipeline.append((CoclustSpecMod(n_clusters=no_cluster, n_init=10, max_iter=200), "CoclustSpecMod"))
 
     for model, model_name in algo_pipeline:
         res_nmi, res_ari, res_acc = execute_algo(model, model_name, mat, y)
