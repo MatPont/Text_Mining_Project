@@ -82,13 +82,14 @@ def embed_docs(documents_file, out_file):
 if __name__ == "__main__":    
     if sys.argv[1] == "help":
         print("- embed_words <vocabulary_file> <out_file>")
+        print("- embed_words2 <dataset_folder> <dataset>")
         print("\n- embed_docs <documents_file> <out_file>")
         
     if sys.argv[1] == "embed_words":
         embed_words(sys.argv[2], sys.argv[3])
     
     if sys.argv[1] == "embed_words2":
-        base_file = dataset_path+"/"+str(sys.argv[3])+"/"+sys.argv[2]+"_preprocessed_"
+        base_file = dataset_path+"/"+str(sys.argv[2])+"/"+sys.argv[3]+"_preprocessed_"
         vocabulary_file = base_file+"vocabulary.csv"
         out_file = base_file+"embedding.mat"
         embed_words(vocabulary_file, out_file)

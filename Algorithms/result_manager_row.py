@@ -9,8 +9,8 @@ from shutil import copyfile
 data_versions = ["2000", "5000", "5000_AllTag", "5000_50", "5000_50_AllTag"]
 mat_versions = ["bow", "tf-idf-l2"]
 datasets = ["classic3", "classic4", "ng5", "ng20", "r8", "r40", "r52", "webkb"]
-algos = ["CoclustInfo", "CoclustMod"]
-#algos = ["CoclustInfo", "CoclustMod", "CoclustSpecMod"]
+#algos = ["CoclustInfo", "CoclustMod"]
+algos = ["CoclustInfo", "CoclustMod", "CoclustSpecMod"]
 
 #chosen = "bow 5000_50"
 
@@ -18,6 +18,15 @@ def create_string(array):
     array_mean = round(mean(array), 2)
     array_stdev = round(stdev(array), 2)
     return str(array_mean)+" $\pm$ "+str(array_stdev)
+    
+def print_result(data_version, dataset, mat_version, algo):
+    res_file = result_path+"/"+data_version+"/"+dataset+"_"+mat_version+"_"+algo+".txt"
+    df = pd.read_csv(res_file, header=None)
+    print("#######\n# {} {}\n#######".format(mat_version, data_version))
+    print("NMI =", create_string(df.iloc[:,0]))
+    print("ARI =", create_string(df.iloc[:,1]))
+    print("ACC =", create_string(df.iloc[:,2]))
+    return df
 
 all_version = list(map(lambda x: ' '.join(x), itertools.product(mat_versions, data_versions)))
 all_version_mean = {newlist: [] for newlist in all_version}
@@ -33,16 +42,11 @@ for dataset in datasets:
         best_string = ""
         print("##############\n# {}\n##############".format(algo))
         for mat_version in mat_versions:
-            for data_version in data_versions:
-                res_file = result_path+"/"+data_version+"/"+dataset+"_"+mat_version+"_"+algo+".txt"
+            for data_version in data_versions:                
                 try:
-                    df = pd.read_csv(res_file, header=None)                
+                    df = print_result(data_version, dataset, mat_version, algo)
                 except:
                     continue
-                print("#######\n# {} {}\n#######".format(mat_version, data_version))
-                print("NMI =", create_string(df.iloc[:,0]))
-                print("ARI =", create_string(df.iloc[:,1]))
-                print("ACC =", create_string(df.iloc[:,2]))
                 
                 mean_algo = mean(pd.concat([df.iloc[:,0], df.iloc[:,1], df.iloc[:,2]]))
                 print("MEAN=", round(mean_algo, 2))
@@ -61,7 +65,7 @@ print("\n\n\n")
 errors = {newlist: 0 for newlist in all_version}
 compare = []
 for i in range(len(all_best_string)):
-    if i % 2 == 0:
+    if i % len(algos) == 0:
         print("#####################")
     print(all_best_string[i])
     print(round(all_best_mean[i], 2))
@@ -110,9 +114,14 @@ for d in range(len(datasets)):
             best_version[datasets[d]] = version
     all_dataset_dict[datasets[d]] = dataset_dict
     
-for name in sorted(best_version):
-    print(name, best_version[name], all_dataset_dict[name][best_version[name]])
-    save_best_result(best_version[name], name)
+for d_name in sorted(best_version):
+    print(d_name, best_version[d_name], all_dataset_dict[d_name][best_version[d_name]])
+    for algo in algos:
+        print("##############\n# {}\n##############".format(algo))    
+        data_version = best_version[d_name].split(" ")[1]
+        mat_version = best_version[d_name].split(" ")[0]
+        print_result(data_version, d_name, mat_version, algo)
+    save_best_result(best_version[d_name], d_name)
 
 
 
