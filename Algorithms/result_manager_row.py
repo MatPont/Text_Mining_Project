@@ -17,16 +17,20 @@ algos = ["CoclustInfo", "CoclustMod", "CoclustSpecMod"]
 def create_string(array):
     array_mean = round(mean(array), 2)
     array_stdev = round(stdev(array), 2)
-    return str(array_mean)+" $\pm$ "+str(array_stdev)
+    return str(array_mean)+("" if array_stdev == 0.0 else " $\pm$ "+str(array_stdev))
     
-def print_result(data_version, dataset, mat_version, algo):
+def get_result(data_version, dataset, mat_version, algo, verbose=True):
     res_file = result_path+"/"+data_version+"/"+dataset+"_"+mat_version+"_"+algo+".txt"
     df = pd.read_csv(res_file, header=None)
-    print("#######\n# {} {}\n#######".format(mat_version, data_version))
-    print("NMI =", create_string(df.iloc[:,0]))
-    print("ARI =", create_string(df.iloc[:,1]))
-    print("ACC =", create_string(df.iloc[:,2]))
-    return df
+    nmi = create_string(df.iloc[:,0])
+    ari = create_string(df.iloc[:,1])
+    acc = create_string(df.iloc[:,2])
+    if verbose:
+        print("#######\n# {} {}\n#######".format(mat_version, data_version))    
+        print("NMI =", nmi)
+        print("ARI =", ari)
+        print("ACC =", acc)
+    return df, nmi, ari, acc
 
 all_version = list(map(lambda x: ' '.join(x), itertools.product(mat_versions, data_versions)))
 all_version_mean = {newlist: [] for newlist in all_version}
@@ -44,7 +48,7 @@ for dataset in datasets:
         for mat_version in mat_versions:
             for data_version in data_versions:                
                 try:
-                    df = print_result(data_version, dataset, mat_version, algo)
+                    df, _, _, _ = get_result(data_version, dataset, mat_version, algo)
                 except:
                     continue
                 
@@ -116,11 +120,17 @@ for d in range(len(datasets)):
     
 for d_name in sorted(best_version):
     print(d_name, best_version[d_name], all_dataset_dict[d_name][best_version[d_name]])
+    nmis, aris, accs = [], [], []
     for algo in algos:
-        print("##############\n# {}\n##############".format(algo))    
         data_version = best_version[d_name].split(" ")[1]
         mat_version = best_version[d_name].split(" ")[0]
-        print_result(data_version, d_name, mat_version, algo)
+        _, nmi, ari, acc = get_result(data_version, d_name, mat_version, algo, verbose=False)
+        nmis.append(nmi)
+        aris.append(ari)
+        accs.append(acc)
+    print("& NMI & "+' & '.join(nmis)+" \\\\")
+    print("& ARI & "+' & '.join(aris)+" \\\\")
+    print("& ACC & "+' & '.join(accs)+" \\\\")
     save_best_result(best_version[d_name], d_name)
 
 

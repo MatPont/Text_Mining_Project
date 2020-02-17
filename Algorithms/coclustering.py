@@ -34,6 +34,7 @@ if len(sys.argv) > 4 or len(sys.argv) < 3:
 data_version = sys.argv[1]
 mat_version = sys.argv[2]
 
+
 if len(sys.argv) == 4:
     datasets = [sys.argv[3]]
 else:
@@ -57,9 +58,10 @@ for dataset in datasets:
     no_cluster = len(np.unique(y))
     print(no_cluster)
 
+
     algo_pipeline = []
-    """algo_pipeline.append((CoclustInfo(n_row_clusters=no_cluster, n_col_clusters=no_cluster, n_init=10, max_iter=200), "CoclustInfo"))
-    algo_pipeline.append((CoclustMod(n_clusters=no_cluster, n_init=10, max_iter=200), "CoclustMod"))"""
+    algo_pipeline.append((CoclustInfo(n_row_clusters=no_cluster, n_col_clusters=no_cluster, n_init=10, max_iter=200), "CoclustInfo"))
+    algo_pipeline.append((CoclustMod(n_clusters=no_cluster, n_init=10, max_iter=200), "CoclustMod"))
     algo_pipeline.append((CoclustSpecMod(n_clusters=no_cluster, n_init=10, max_iter=200), "CoclustSpecMod"))
 
     for model, model_name in algo_pipeline:
