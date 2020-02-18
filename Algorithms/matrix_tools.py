@@ -9,7 +9,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import normalize
 from math import log
 from scipy import io, sparse
-from glove import Corpus
 from nltk.tokenize import word_tokenize
 from functools import partial
 

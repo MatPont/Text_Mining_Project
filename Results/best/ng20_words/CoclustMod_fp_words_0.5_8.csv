@@ -1,0 +1,7 @@
+,Row,Column,Value
+2,lewis,service_guest,0.5829409040355069
+0,lewis,online_communication,0.5918550203948743
+1,lewis,organization_netcom,0.6080888230298795
+4,online_communication,service_guest,0.8570832791891454
+5,organization_netcom,service_guest,0.8671707784071732
+3,online_communication,organization_netcom,0.8842261977072524
