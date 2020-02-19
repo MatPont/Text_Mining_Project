@@ -1,4 +1,7 @@
 ,Row,Column,Value
-0,arizona,endanger,0.6388695864602028
-2,endanger,gould,0.6435071124511056
-1,arizona,gould,0.680630018592087
+3,fahd,keersmaeker,0.38267781105258003
+1,definite,keersmaeker,0.4015091924546829
+0,definite,fahd,0.44651374819876277
+4,fahd,vogtle,0.4665433081365644
+5,keersmaeker,vogtle,0.575200974930334
+2,definite,vogtle,0.6845825648104086

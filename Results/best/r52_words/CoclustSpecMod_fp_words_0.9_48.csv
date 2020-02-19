@@ -1,4 +1,4 @@
 ,Row,Column,Value
-1,diagnostic,rospatch,0.7099282661707609
-2,retrieval,rospatch,0.7184549415359557
-0,diagnostic,retrieval,0.8553503998618457
+1,bancgroup,dauphin,0.6916237604205199
+0,bancgroup,colonial,0.6990750888465396
+2,colonial,dauphin,0.8329254575081804

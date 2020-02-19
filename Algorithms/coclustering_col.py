@@ -63,8 +63,10 @@ def compute_column_metrics(column_labels, word_vectors, df_vocab, alphas=alphas)
             all_fp_words.append((alpha, l, fp_pair_words))
 
             # Compute metrics
-            tp += (np.triu(sim_matrix_label, 1) >= alpha).sum()
-            fp += (np.triu(sim_matrix_label, 1) < alpha).sum()
+            tocompare = np.copy(sim_matrix_label)
+            tocompare[np.tril_indices(tocompare.shape[0], 0)] = np.nan            
+            tp += (tocompare >= alpha).sum()
+            fp += (tocompare < alpha).sum()
 
         # Filter the sim_matrix by keeping values of words being not in the same cluster
         column_labels = np.array(column_labels)
@@ -73,8 +75,17 @@ def compute_column_metrics(column_labels, word_vectors, df_vocab, alphas=alphas)
         sim_matrix_diff[matrix_filter] = None
 
         # Compute metrics
-        tn += (np.triu(sim_matrix_diff, 1) < alpha).sum()
-        fn += (np.triu(sim_matrix_diff, 1) >= alpha).sum()
+        tocompare = np.copy(sim_matrix_diff)
+        tocompare[np.tril_indices(tocompare.shape[0], 0)] = np.nan
+        tn += (tocompare < alpha).sum()
+        fn += (tocompare >= alpha).sum()
+        
+        print("alpha = ", alpha)
+        print("tp = ", tp)
+        print("tn = ", tn)
+        print("fp = ", fp)
+        print("fn = ", fn)
+        input()
         
         # Get pair words names and score
         pair_words = get_pair_words(sim_matrix_diff)
@@ -92,6 +103,7 @@ def compute_column_metrics(column_labels, word_vectors, df_vocab, alphas=alphas)
 #####################
 if len(sys.argv) > 3 or len(sys.argv) < 2:
     print("Usage: {} data_version [dataset_name]".format(sys.argv[0]))
+    exit()
 
 data_version = sys.argv[1]
 
@@ -138,6 +150,8 @@ for dataset in datasets:
         res_accs, all_fp_words, all_fn_words = compute_column_metrics(model.column_labels_, word_vectors, df_vocab)
 
         # Save results
+        print("going to save")
+        input()
         out_dir = result_path+"/"+data_version+"/"
         makedir(out_dir)
         base_file = out_dir+dataset+"_"+model_name
