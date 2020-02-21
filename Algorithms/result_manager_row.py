@@ -5,6 +5,7 @@ import pandas as pd
 from statistics import mean, stdev
 import itertools
 from shutil import copyfile
+from util import makedir
 
 data_versions = ["2000", "5000", "5000_AllTag", "5000_50", "5000_50_AllTag"]
 mat_versions = ["bow", "tf-idf-l2"]
@@ -17,7 +18,7 @@ algos = ["CoclustInfo", "CoclustMod", "CoclustSpecMod"]
 def create_string(array):
     array_mean = round(mean(array), 2)
     array_stdev = round(stdev(array), 2)
-    return str(array_mean)+("" if array_stdev == 0.0 else " $\pm$ "+str(array_stdev))
+    return str(array_mean)+( "" if array_stdev == 0.0 else " $\pm$ "+str(array_stdev) )
     
 def get_result(data_version, dataset, mat_version, algo, verbose=True):
     res_file = result_path+"/"+data_version+"/"+dataset+"_"+mat_version+"_"+algo+".txt"
@@ -89,17 +90,31 @@ for version in errors:
 ##########################################
 # Get best version for each dataset
 ##########################################
-def save_best_result(best_version, this_dataset):
+def save_best_dataset(best_version, this_dataset):
     # Copy files in the "best" folder
     best_mat_version, best_data_version = best_version.split(" ")
     path = dataset_path+"/"+best_data_version+"/"+this_dataset
-    new_path = dataset_path+"/best/"+this_dataset
+    out_dir = dataset_path+"/best/"
+    makedir(out_dir)    
+    new_path = out_dir+this_dataset
     files = ["_preprocessed.csv", "_preprocessed_"+best_mat_version+".mat", "_preprocessed_vocabulary.csv"]
     out_files = ["_preprocessed.csv", "_preprocessed.mat", "_preprocessed_vocabulary.csv"]    
     for i in range(len(files)):
         file_name = files[i]
         print(path+file_name)
         copyfile(path+file_name, new_path+out_files[i])
+        
+
+def move_best_result(best_version, this_dataset):
+    best_mat_version, best_data_version = best_version.split(" ")
+    path = result_path+"/"+best_data_version+"/"+this_dataset
+    out_dir = result_path+"/best/row_results/"
+    makedir(out_dir)
+    new_path = out_dir+this_dataset
+    for algo in algos:
+        file_name = path+"_"+best_mat_version+"_"+algo+".txt"
+        new_file_name = new_path+"_"+algo+".txt"
+        copyfile(file_name, new_file_name)
 
 
 print("\n\n\n")
@@ -131,7 +146,8 @@ for d_name in sorted(best_version):
     print("& NMI & "+' & '.join(nmis)+" \\\\")
     print("& ARI & "+' & '.join(aris)+" \\\\")
     print("& ACC & "+' & '.join(accs)+" \\\\")
-    save_best_result(best_version[d_name], d_name)
+    save_best_dataset(best_version[d_name], d_name)
+    move_best_result(best_version[d_name], d_name)
 
 
 
@@ -156,7 +172,7 @@ for i in range(0, len(compare), 2):
     this_dataset = datasets[i//2]
     print(this_dataset, best_version, best_version_mean)
     
-    save_best_result(best_version, this_dataset)"""
+    save_best_dataset(best_version, this_dataset)"""
     
         
 

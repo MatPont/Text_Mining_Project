@@ -1,0 +1,16 @@
+,Row,Column,Value
+4,biotechnology,squibb,0.4394026024130403
+1,biotechnology,conagra,0.4583383837432011
+2,biotechnology,fildes,0.4871892206255198
+0,biotechnology,cetus,0.5252756528042155
+11,conagra,squibb,0.5282094288014905
+3,biotechnology,monfort,0.5324848925387525
+14,monfort,squibb,0.5560522181367805
+8,cetus,squibb,0.585570234844569
+9,conagra,fildes,0.6010496489141529
+5,cetus,conagra,0.6251116288712518
+7,cetus,monfort,0.6289123639209218
+13,fildes,squibb,0.6351031191218925
+12,fildes,monfort,0.6465150688542689
+10,conagra,monfort,0.6516663718954618
+6,cetus,fildes,0.708409948804043

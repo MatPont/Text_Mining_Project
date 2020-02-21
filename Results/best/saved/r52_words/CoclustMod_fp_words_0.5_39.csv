@@ -1,0 +1,7 @@
+,Row,Column,Value
+2,fraud,vw,0.619538699052688
+1,fraud,volkswagen,0.6814845639099255
+4,supervisory,vw,0.6848206586733533
+5,volkswagen,vw,0.6910407235616961
+0,fraud,supervisory,0.763210666040499
+3,supervisory,volkswagen,0.817008990616951

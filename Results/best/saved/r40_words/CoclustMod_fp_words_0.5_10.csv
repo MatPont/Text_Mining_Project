@@ -1,0 +1,16 @@
+,Row,Column,Value
+4,ad,morning,0.6618808609718265
+13,framework,morning,0.7199243961498835
+14,inability,morning,0.7205191523361503
+2,ad,framework,0.7221978339098325
+1,ad,consequence,0.733274426494866
+0,ad,briefing,0.7494937606383587
+3,ad,inability,0.753677486729429
+11,consequence,morning,0.7655643606056138
+8,briefing,morning,0.7662864478614456
+7,briefing,inability,0.7725187785341779
+12,framework,inability,0.8057724744476871
+5,briefing,consequence,0.834182554502507
+6,briefing,framework,0.8527245161340311
+10,consequence,inability,0.8594485397243697
+9,consequence,framework,0.8892645160017438

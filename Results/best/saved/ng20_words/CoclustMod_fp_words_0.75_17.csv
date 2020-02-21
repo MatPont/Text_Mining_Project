@@ -1,0 +1,7 @@
+,Row,Column,Value
+2,neal,service_guest,0.6330240027849807
+0,neal,online_communication,0.6443572282344852
+1,neal,organization_netcom,0.6811361171482666
+4,online_communication,service_guest,0.8570832791891454
+5,organization_netcom,service_guest,0.8671707784071732
+3,online_communication,organization_netcom,0.8842261977072524

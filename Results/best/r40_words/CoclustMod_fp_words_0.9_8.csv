@@ -1,2 +1,13 @@
 ,Row,Column,Value
-0,argue,coordinate,0.8537996630393487
+2,netback,unitholders,0.660345328636988
+0,netback,safe,0.68259742428626
+4,safe,unitholders,0.6851536765836538
+1,netback,safety,0.7135751371342125
+5,safety,unitholders,0.7153365270356706
+3,safe,safety,0.8267716865897979
+2,netback,unitholders,0.660345328636988
+0,netback,safe,0.68259742428626
+4,safe,unitholders,0.6851536765836538
+1,netback,safety,0.7135751371342125
+5,safety,unitholders,0.7153365270356706
+3,safe,safety,0.8267716865897979

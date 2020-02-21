@@ -58,8 +58,8 @@ def compute_column_metrics(column_labels, word_vectors, df_vocab, alphas=alphas)
             sim_matrix_label = sim_matrix.iloc[ind,].iloc[:,ind]
 
             # Get pair words names and score
-            pair_words = get_pair_words(sim_matrix_label)
-            fp_pair_words = pair_words[:200]
+            fp_pair_words = get_pair_words(sim_matrix_label)
+            fp_pair_words = pd.concat([fp_pair_words[:200], fp_pair_words[-200:]])
             all_fp_words.append((alpha, l, fp_pair_words))
 
             # Compute metrics
@@ -72,6 +72,7 @@ def compute_column_metrics(column_labels, word_vectors, df_vocab, alphas=alphas)
         column_labels = np.array(column_labels)
         matrix_filter = np.matrix(list(map(lambda x: x == column_labels, column_labels)))
         sim_matrix_diff = sim_matrix.copy()
+        # It will raise some warnings when we compare with alpha below
         sim_matrix_diff[matrix_filter] = None
 
         # Compute metrics
@@ -80,16 +81,9 @@ def compute_column_metrics(column_labels, word_vectors, df_vocab, alphas=alphas)
         tn += (tocompare < alpha).sum()
         fn += (tocompare >= alpha).sum()
         
-        print("alpha = ", alpha)
-        print("tp = ", tp)
-        print("tn = ", tn)
-        print("fp = ", fp)
-        print("fn = ", fn)
-        input()
-        
         # Get pair words names and score
-        pair_words = get_pair_words(sim_matrix_diff)
-        fn_pair_words = pair_words[-200:]
+        fn_pair_words = get_pair_words(sim_matrix_diff)
+        fn_pair_words = pd.concat([fn_pair_words[:200], fn_pair_words[-200:]])
         all_fn_words.append((alpha, fn_pair_words))
 
         acc = (tp + tn) / (tp + tn + fp + fn)
@@ -149,9 +143,9 @@ for dataset in datasets:
 
         res_accs, all_fp_words, all_fn_words = compute_column_metrics(model.column_labels_, word_vectors, df_vocab)
 
-        # Save results
-        print("going to save")
+        print("going to save...")
         input()
+        # Save results
         out_dir = result_path+"/"+data_version+"/"
         makedir(out_dir)
         base_file = out_dir+dataset+"_"+model_name

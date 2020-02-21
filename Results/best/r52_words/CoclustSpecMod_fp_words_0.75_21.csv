@@ -1,4 +1,7 @@
 ,Row,Column,Value
-2,interconnect,learjet,0.508045950775834
-0,gate,interconnect,0.54926627993806
-1,gate,learjet,0.560114372651764
+0,keystone,oat,0.5545440157913495
+2,oat,quaker,0.5592996720393336
+1,keystone,quaker,0.7821647677427326
+0,keystone,oat,0.5545440157913495
+2,oat,quaker,0.5592996720393336
+1,keystone,quaker,0.7821647677427326
