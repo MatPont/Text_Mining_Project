@@ -10,4 +10,4 @@ it will call the "pipeline" execution of ```preprocessing_tools.py``` to do the 
 
 ```./pipeline_coclustering.sh``` 
 
-it will run the co-clustering algorithms (CoclustInfo, CoclustMod and CoclustSpecMod) on all the versions of each dataset with ```coclustering.py``` then keep the best version of each dataset with ```result_manager_row.py``` and finally get the results of the column clustering with ```coclustering_col.py```.
+it will run the co-clustering algorithms (CoclustInfo, CoclustMod and CoclustSpecMod) on all the versions of each dataset with ```coclustering.py``` then keep the best version of each dataset with ```result_manager_row.py``` and finally get the results of the columns clustering with ```coclustering_col.py```.
