@@ -167,9 +167,9 @@ def preprocess(words, options):
                     tag = pos_tag(temp)
 
                 # Remove non-noun words
-                """if options["keep_only_nouns"]:        
+                if options["keep_only_nouns"]:        
                     if not tag[0][1] in tag_to_keep:
-                        continue"""
+                        continue
 
                 # Lemmatization
                 if options["lemmatization"]:
