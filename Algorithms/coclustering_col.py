@@ -143,8 +143,6 @@ for dataset in datasets:
 
         res_accs, all_fp_words, all_fn_words = compute_column_metrics(model.column_labels_, word_vectors, df_vocab)
 
-        print("going to save...\nwait input")
-        input()
         # Save results
         out_dir = result_path+"/"+data_version+"/"
         makedir(out_dir)

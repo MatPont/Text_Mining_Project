@@ -14,6 +14,7 @@ preprocess_one()
     out_dataset_path=${dataset_path}${clean_threshold}${post_out_path}/
     mkdir $out_dataset_path
     out_dataset_file=${out_dataset_path}${dataset_name}_preprocessed.csv
+    
     python3 preprocessing_tools.py pipeline $raw_dataset_file $out_dataset_file $clean_threshold 0 /dev/null $bigram_min_count 10 $preprocessing_options
     python3 matrix_tools.py base $out_dataset_file
 }
