@@ -12,7 +12,7 @@ it will call the "pipeline" execution of [```preprocessing_tools.py```](https://
 
 ##### Word embedding
 
-Then we need to create the BERT embeddings of the words of each dataset. We recommend to install bert-as-service (https://github.com/hanxiao/bert-as-service), to download a pre-trained model ([we have chosen this one](https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip)) and finally run a service with:
+Then we need to create the BERT embeddings of the words of each dataset. We recommend to install [bert-as-service](https://github.com/hanxiao/bert-as-service), to download a pre-trained model ([we have chosen this one](https://storage.googleapis.com/bert_models/2018_10_18/uncased_L-12_H-768_A-12.zip)) and finally run a service with:
 
 ```bert-serving-start -model_dir=PRE_TRAINED_BERT_MODEL_PATH -max_seq_len=NONE -verbose```
 
