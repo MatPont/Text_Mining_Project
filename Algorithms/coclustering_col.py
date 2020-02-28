@@ -9,9 +9,11 @@ from sklearn.metrics import normalized_mutual_info_score as nmi
 from sklearn.metrics import adjusted_rand_score as ari
 from coclust.coclustering import CoclustInfo, CoclustMod, CoclustSpecMod
 from coclust.evaluation.external import accuracy
+
 from config import result_path, dataset_path
 from util import makedir, loadmat
 from matrix_tools import similarity_matrix_coclustering, similarity_matrix
+
 
 
 alphas = [0.9, 0.75, 0.5]

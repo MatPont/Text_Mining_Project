@@ -1,9 +1,12 @@
 # Author: Mathieu Pont
 
-from config import result_path, dataset_path
 import pandas as pd
 import sys
 from statistics import mean, stdev
+
+from config import result_path, dataset_path
+
+
 
 datasets = ["classic3", "classic4", "ng5", "ng20", "r8", "r40", "r52", "webkb"]
 algos = ["CoclustInfo", "CoclustMod", "CoclustSpecMod"]

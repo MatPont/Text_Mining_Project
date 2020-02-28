@@ -4,6 +4,8 @@ import sys
 import pandas as pd
 import json
 
+
+
 def separe_text_label(file_name, out_prefix_file_name):
     df = pd.read_csv(file_name, sep="\t")
     df.columns = ['Label', 'Text']

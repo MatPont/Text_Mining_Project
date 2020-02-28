@@ -1,11 +1,14 @@
 # Author: Mathieu Pont
 
-from config import result_path, dataset_path
 import pandas as pd
 from statistics import mean, stdev
 import itertools
 from shutil import copyfile
+
+from config import result_path, dataset_path
 from util import makedir
+
+
 
 data_versions = ["2000", "5000", "5000_AllTag", "5000_50", "5000_50_AllTag"]
 mat_versions = ["bow", "tf-idf-l2"]

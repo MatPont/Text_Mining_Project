@@ -7,7 +7,9 @@ from bert_serving.client import BertClient
 from scipy import sparse, io
 from nltk.tokenize import word_tokenize
 import re
+
 from config import dataset_path
+
 
 
 # Need bert-as-service:
