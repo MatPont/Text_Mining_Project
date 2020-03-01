@@ -26,4 +26,4 @@ to create the embeddings:
 
 it will run the co-clustering algorithms (CoclustInfo, CoclustMod and CoclustSpecMod) on all the versions of each dataset with [```coclustering.py```](https://github.com/MatPont/Text_Mining_Project/blob/master/Algorithms/coclustering.py) then keep the best version of each dataset (according the NMI, ARI and clustering accuracy) with [```result_manager_row.py```](https://github.com/MatPont/Text_Mining_Project/blob/master/Algorithms/result_manager_row.py) and finally get the results of the columns clustering with [```coclustering_col.py```](https://github.com/MatPont/Text_Mining_Project/blob/master/Algorithms/coclustering_col.py).
 
-Then you can call [```result_manager_col.py```](https://github.com/MatPont/Text_Mining_Project/blob/master/Algorithms/result_manager_col.py) to print the result of the columns clustering (by calculating TP, FP, TN and FN).
+Then you can call [```result_manager_col.py```](https://github.com/MatPont/Text_Mining_Project/blob/master/Algorithms/result_manager_col.py) to print the result of the columns clustering.
